@@ -238,18 +238,6 @@ examples/vs-win64-gui-client-demo/    Visual Studio Win64 带界面示例
 
 其中 Win64 GUI 示例包含窗口、输入框、按钮和日志框，适合直接测试客户端接口。
 
-## 开源打包说明
-
-源码包不包含：
-
-- `node_modules/`
-- `frontend/dist/`
-- `backend/cmd/server/webdist/` 里的构建产物
-- SQLite 数据库文件
-- Windows/Linux 编译产物
-- ZIP 发布包
-
-下载源码后按“本地开发启动”重新安装依赖和构建即可。
 
 ## License
 
