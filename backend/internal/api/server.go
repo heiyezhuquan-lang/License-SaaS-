@@ -148,8 +148,22 @@ func (s *Server) roleAuth(role string) gin.HandlerFunc {
 				return
 			}
 		} else if role == "agent" {
+			parts := strings.SplitN(claims.Username, ":", 2)
+			agentID, _ := strconv.Atoi(parts[0])
+			agentUsername := ""
+			if len(parts) > 1 {
+				agentUsername = parts[1]
+			}
 			var status string
-			if err := s.DB.QueryRow(`SELECT status FROM agents WHERE username=?`, claims.Username).Scan(&status); err != nil || status != "active" {
+			var count int
+			if agentID > 0 {
+				if err := s.DB.QueryRow(`SELECT username,status FROM agents WHERE id=?`, agentID).Scan(&agentUsername, &status); err != nil || status != "active" {
+					errorJSON(c, 401, "登录令牌无效或已过期")
+					c.Abort()
+					return
+				}
+				claims.Username = fmt.Sprintf("%d:%s", agentID, agentUsername)
+			} else if err := s.DB.QueryRow(`SELECT COUNT(*) FROM agents WHERE username=? AND status='active'`, claims.Username).Scan(&count); err != nil || count == 0 {
 				errorJSON(c, 401, "登录令牌无效或已过期")
 				c.Abort()
 				return
