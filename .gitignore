@@ -1,0 +1,50 @@
+# Dependencies
+frontend/node_modules/
+
+# Frontend build output
+frontend/dist/
+backend/cmd/server/webdist/*
+!backend/cmd/server/webdist/.gitkeep
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Build artifacts
+license-saas-server
+license-saas
+*.exe
+*.bin
+*.dll
+*.so
+*.dylib
+
+# Release packages
+*.zip
+*.7z
+*.rar
+*.tar
+*.tar.gz
+*.tgz
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# Local release directories
+dist-windows/
+dist-windows-single/
+BUILD_REPORT.md
